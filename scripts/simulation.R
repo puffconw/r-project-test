@@ -1,7 +1,7 @@
 library(ggplot2)
 
 # Load data (use relative path)
-tri <- read.csv("data/raw/tri_2024_us.csv", check.names = FALSE)
+tri <- read.csv("data/raw/tri_small.csv", check.names = FALSE)
 
 # Select relevant variables
 tri_sub <- tri[, c(
