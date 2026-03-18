@@ -43,7 +43,7 @@ Source: https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-
 This repository was developed with assistance from ChatGPT for help with repository organization, code formatting, and documentation. All analytical decisions, interpretations, and conclusions were made by the author.
 
 ## Notes for Reproducibility
-All scripts use relative file paths so that the project can be run on another computer if the repository structure is preserved.
+Due to GitHub file size limitations, a subset of the TRI dataset is provided for reproducibility.
 
 ## References
 - U.S. Environmental Protection Agency. Toxics Release Inventory (TRI) Program.
