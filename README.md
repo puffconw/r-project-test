@@ -6,7 +6,7 @@ Kira Lu
 Cornell University, Master of Public Health (MPH)  
 
 ### Contact  
-Email:ql377@cornell.edu
+Email: ql377@cornell.edu
 
 ---
 
@@ -46,6 +46,6 @@ This repository was developed with assistance from ChatGPT for help with reposit
 Due to GitHub file size limitations, a subset of the TRI dataset is provided for reproducibility.
 
 ## References
-- U.S. Environmental Protection Agency. Toxics Release Inventory (TRI) Program.
-- Agarwal N. Toxic Exposure in America: Estimating Fetal and Infant Health Outcomes from 14 Years of TRI Reporting. Journal of Health Economics. 2010.
-- Wilson SM, et al. Assessment of the Distribution of Toxic Release Inventory Facilities in Metropolitan Charleston: An Environmental Justice Case Study. American Journal of Public Health. 2012.
+1. U.S. Environmental Protection Agency. Toxics Release Inventory (TRI) Program. Accessed March 18, 2026. https://www.epa.gov/toxics-release-inventory-tri-program
+2. Agarwal N. Toxic exposure in America: estimating fetal and infant health outcomes from 14 years of TRI reporting. J Health Econ. 2010.
+3. Wilson SM, Fraser-Rahim H, Williams E, et al. Assessment of the distribution of toxic release inventory facilities in metropolitan Charleston: an environmental justice case study. Am J Public Health. 2012.
