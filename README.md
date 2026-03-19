@@ -35,9 +35,9 @@ Source: https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-
 - `output/reports/`: PDF reports from previous check points
 
 ## Deliverables
-- Check Point 02 report: `output/reports/VTPEH6270contentcheck2.pdf`
-- Check Point 03 report: `output/reports/VTPEH6270_CP03_KiraLu.pdf`
-- Check Point 04 report: `output/reports/VTPEH6270_CP04_KiraLu.pdf`
+- Check Point 02 report: [VTPEH6270contentcheck2.pdf](output/reports/VTPEH6270contentcheck2.pdf)
+- Check Point 03 report: [VTPEH6270_CP03_KiraLu.pdf](output/reports/VTPEH6270_CP03_KiraLu.pdf)
+- Check Point 04 report: [VTPEH6270_CP04_KiraLu.pdf](output/reports/VTPEH6270_CP04_KiraLu.pdf)
 
 ## AI Tool Disclosure
 This repository was developed with assistance from ChatGPT for help with repository organization, code formatting, and documentation. All analytical decisions, interpretations, and conclusions were made by the author.
