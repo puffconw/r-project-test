@@ -28,7 +28,6 @@ Source: https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-
 
 ## 📁 Repository Structure  
 - `data/raw/`: original TRI 2024 data file
-- `data/processed/`: processed data files generated during analysis
 - `scripts/exploration.R`: exploratory analysis script based on Check Point 03
 - `scripts/simulation.R`: simulation script based on Check Point 04
 - `output/figures/`: figures generated from analysis scripts
