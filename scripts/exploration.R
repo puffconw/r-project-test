@@ -1,27 +1,13 @@
 library(ggplot2)
 
+# Load processed subset data
 tri <- read.csv("data/raw/tri_small.csv", check.names = FALSE)
 
-tri_sub <- tri[, c(
-  "1. YEAR",
-  "8. ST",
-  "7. COUNTY",
-  "23. INDUSTRY SECTOR",
-  "37. CHEMICAL",
-  "107. TOTAL RELEASES",
-  "51. 5.1 - FUGITIVE AIR",
-  "52. 5.2 - STACK AIR",
-  "53. 5.3 - WATER",
-  "65. ON-SITE RELEASE TOTAL"
-)]
+# Since tri_small.csv already contains cleaned/renamed variables,
+# use it directly
+tri_sub <- tri
 
-names(tri_sub) <- c(
-  "year", "state", "county", "industry_sector", "chemical",
-  "total_releases", "fugitive_air", "stack_air", "water", "onsite_total"
-)
-
-tri_sub$air_releases <- tri_sub$fugitive_air + tri_sub$stack_air
-
+# Create long-format dataset for pathway comparison
 tri_pathway <- data.frame(
   releases = c(tri_sub$air_releases, tri_sub$water),
   pathway = factor(
@@ -30,10 +16,50 @@ tri_pathway <- data.frame(
   )
 )
 
+# Log transformation
 tri_pathway$log_releases <- log1p(tri_pathway$releases)
 
+# Summary statistics
+pathway_summary_raw <- aggregate(
+  log_releases ~ pathway,
+  data = tri_pathway,
+  FUN = function(x) {
+    c(
+      mean = mean(x, na.rm = TRUE),
+      median = median(x, na.rm = TRUE),
+      IQR = IQR(x, na.rm = TRUE)
+    )
+  }
+)
+
+pathway_summary <- data.frame(
+  pathway = pathway_summary_raw$pathway,
+  mean_log = pathway_summary_raw$log_releases[, "mean"],
+  median_log = pathway_summary_raw$log_releases[, "median"],
+  IQR_log = pathway_summary_raw$log_releases[, "IQR"]
+)
+
+# Save processed data
+write.csv(tri_sub, "data/processed/tri_subset.csv", row.names = FALSE)
+write.csv(pathway_summary, "data/processed/pathway_summary.csv", row.names = FALSE)
+
+# Plot
 p1 <- ggplot(tri_pathway, aes(x = log_releases)) +
   geom_histogram(bins = 30) +
-  facet_wrap(~ pathway, ncol = 1, scales = "free_y")
+  facet_wrap(~ pathway, ncol = 1, scales = "free_y") +
+  labs(
+    title = "Distribution of Toxic Chemical Releases by Pathway",
+    x = "log(1 + releases in pounds)",
+    y = "Number of facility records"
+  ) +
+  theme_classic()
 
-ggsave("output/figures/Figure1_Toxic_Releases_by_Pathway.pdf", p1)
+# Save figure
+ggsave(
+  filename = "output/figures/Figure1_Toxic_Releases_by_Pathway.pdf",
+  plot = p1,
+  device = "pdf",
+  width = 180,
+  height = 220,
+  units = "mm"
+)
