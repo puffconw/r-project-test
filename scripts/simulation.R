@@ -1,32 +1,23 @@
 library(ggplot2)
 
-# Load data (use relative path)
+# Load processed subset data
 tri <- read.csv("data/raw/tri_small.csv", check.names = FALSE)
 
-# Select relevant variables
-tri_sub <- tri[, c(
-  "51. 5.1 - FUGITIVE AIR",
-  "52. 5.2 - STACK AIR",
-  "53. 5.3 - WATER"
-)]
-
-names(tri_sub) <- c("fugitive_air", "stack_air", "water")
-
-# Create air releases
-tri_sub$air_releases <- tri_sub$fugitive_air + tri_sub$stack_air
+# tri_small.csv already contains cleaned variables
+tri_sub <- tri
 
 # Simulation function
 simulate_releases <- function(effect_size, noise, n, mu = 2) {
   pathway <- factor(rep(c("Air", "Water"), each = n), levels = c("Air", "Water"))
-  
+
   mu_air <- mu + effect_size
   mu_water <- mu
-  
+
   log_releases <- c(
     rnorm(n, mean = mu_air, sd = noise),
     rnorm(n, mean = mu_water, sd = noise)
   )
-  
+
   data.frame(pathway = pathway, log_releases = log_releases)
 }
 
@@ -37,7 +28,7 @@ summarize_by_pathway <- function(sim_dat) {
     data = sim_dat,
     FUN = function(x) c(mean = mean(x), median = median(x), IQR = IQR(x))
   )
-  
+
   data.frame(
     pathway = tmp$pathway,
     mean_log = tmp$log_releases[, "mean"],
@@ -50,7 +41,7 @@ summarize_by_pathway <- function(sim_dat) {
 run_one_sim <- function(effect_size, noise, n, mu = 2) {
   sim_dat <- simulate_releases(effect_size = effect_size, noise = noise, n = n, mu = mu)
   sim_sum <- summarize_by_pathway(sim_dat)
-  
+
   list(
     data = sim_dat,
     summary = sim_sum
@@ -72,6 +63,7 @@ for (e in effect_sizes) {
   for (n in sample_sizes) {
     for (s in noise_levels) {
       out <- run_one_sim(effect_size = e, noise = s, n = n)
+
       sim_store[[idx]] <- list(
         effect_size = e,
         sample_size = n,
@@ -79,6 +71,7 @@ for (e in effect_sizes) {
         data = out$data,
         summary = out$summary
       )
+
       idx <- idx + 1
     }
   }
@@ -88,7 +81,7 @@ for (e in effect_sizes) {
 plot_df <- do.call(rbind, lapply(sim_store, function(x) {
   m_air <- x$summary$mean_log[x$summary$pathway == "Air"]
   m_water <- x$summary$mean_log[x$summary$pathway == "Water"]
-  
+
   data.frame(
     effect_size = x$effect_size,
     sample_size = x$sample_size,
@@ -103,8 +96,11 @@ write.csv(plot_df, "data/processed/simulation_summary.csv", row.names = FALSE)
 # Plot heatmap
 p_sim <- ggplot(plot_df, aes(x = effect_size, y = sample_size, fill = mean_diff)) +
   geom_tile(color = "white", linewidth = 0.2) +
-  facet_wrap(~ noise, nrow = 1,
-             labeller = labeller(noise = function(x) paste("Noise =", x))) +
+  facet_wrap(
+    ~ noise,
+    nrow = 1,
+    labeller = labeller(noise = function(x) paste("Noise =", x))
+  ) +
   scale_fill_gradient(low = "grey20", high = "skyblue", name = "Mean diff") +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
