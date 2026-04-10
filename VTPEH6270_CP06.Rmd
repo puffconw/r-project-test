@@ -1,0 +1,137 @@
+---
+title: "VTPEH 6270 - Check Point 06: Statistical Analyses"
+author: "Kira Lu"
+date: "`r Sys.Date()`"
+editor_options:
+  chunk_output_type: console
+output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    toc_depth: 1
+    number_sections: true
+urlcolor: blue
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+# Introduction
+
+## Research Question
+
+This study investigates whether the magnitude of toxic chemical releases differs between air and water release pathways.
+
+## Scientific Background
+
+Environmental exposure to toxic chemicals varies by release pathway, with air and water pathways presenting different risks to human health and ecosystems. Previous studies have shown that toxic exposure may be associated with adverse health outcomes, particularly in vulnerable populations.^1,2^ The U.S. Environmental Protection Agency’s Toxics Release Inventory (TRI) provides a comprehensive dataset to examine these patterns across industrial facilities.^3^
+
+# Methods
+
+## Data
+
+The data used in this study come from the U.S. Environmental Protection Agency (EPA) Toxics Release Inventory (TRI) 2024 dataset. Due to GitHub file size limitations, a subset of the dataset (`tri_small.csv`) was used.
+
+The key variables include:
+
+- `air_releases`: sum of fugitive and stack air emissions
+- `water`: total water releases
+
+A long-format dataset was created to compare the two release pathways. A log transformation was then applied to reduce skewness in release amounts.
+
+```{r, results='hide'}
+# Package
+library(ggplot2)
+
+# Load data
+tri <- read.csv("data/raw/tri_small.csv", check.names = FALSE)
+
+# Use processed subset directly
+tri_sub <- tri
+
+# Create long-format dataset
+tri_pathway <- data.frame(
+  releases = c(tri_sub$air_releases, tri_sub$water),
+  pathway = factor(
+    c(rep("Air", nrow(tri_sub)), rep("Water", nrow(tri_sub))),
+    levels = c("Air", "Water")
+  )
+)
+
+# Log transform
+tri_pathway$log_releases <- log1p(tri_pathway$releases)
+```
+
+## Statistical Analysis
+
+To compare release amounts between pathways, a Wilcoxon rank-sum test was used because the release data are highly skewed and do not satisfy the assumptions of normality required for a two-sample t-test.
+
+The hypotheses were:
+
+- **H0:** There is no difference in toxic release amounts between air and water pathways.
+- **H1:** There is a difference in toxic release amounts between air and water pathways.
+
+# Results
+
+## Visualization
+
+The following histogram and boxplot were used to visualize the distribution of log-transformed toxic releases by pathway.
+
+```{r}
+ggplot(tri_pathway, aes(x = log_releases)) +
+  geom_histogram(bins = 30) +
+  facet_wrap(~ pathway, ncol = 1, scales = "free_y") +
+  labs(
+    title = "Distribution of Toxic Chemical Releases by Pathway",
+    x = "log(1 + releases in pounds)",
+    y = "Number of facility records"
+  ) +
+  theme_classic()
+```
+
+```{r}
+ggplot(tri_pathway, aes(x = pathway, y = log_releases)) +
+  geom_boxplot() +
+  labs(
+    title = "Comparison of Log-Transformed Toxic Releases by Pathway",
+    x = "Pathway",
+    y = "log(1 + releases in pounds)"
+  ) +
+  theme_classic()
+```
+
+## Statistical Test
+
+```{r}
+test_result <- wilcox.test(log_releases ~ pathway, data = tri_pathway)
+test_result
+```
+
+A Wilcoxon rank-sum test showed a statistically significant difference in log-transformed toxic releases between air and water pathways (W = 19635229, p < 2.2e-16).
+
+## Interpretation
+
+The Wilcoxon rank-sum test was used to compare log-transformed toxic release amounts between air and water pathways. The results show a statistically significant difference between the two groups (W = 19635229, p < 2.2e-16). Therefore, the null hypothesis of no difference is rejected, indicating that the distribution of toxic releases differs between air and water pathways.
+
+# Conclusion
+
+This analysis examined whether toxic chemical release amounts differed between air and water pathways in the TRI dataset. Both the Wilcoxon rank-sum test and the visualizations indicate a clear difference between the two pathways. In particular, water releases are highly concentrated near zero with many extreme outliers, while air releases show a broader distribution. These findings suggest that pathway is strongly associated with differences in the magnitude and distribution of toxic releases.
+
+# GitHub Repository
+
+The GitHub repository containing the data, scripts, and related project materials is available here:
+
+**https://github.com/puffconw/r-project-test.git**
+
+# AI Use Disclosure
+
+This document was developed with assistance from ChatGPT for code debugging, formatting, and preparation of the R Markdown structure. All analytical decisions, statistical interpretation, and final writing were reviewed and completed by the author.
+
+# References
+
+1. Agarwal N, Banternghansa C, Bui LTM. Toxic exposure in America: estimating fetal and infant health outcomes from 14 years of TRI reporting. *J Health Econ.* 2010;29(4):557-574.
+
+2. Wilson SM, Fraser-Rahim H, Williams E, et al. Assessment of the distribution of toxic release inventory facilities in metropolitan Charleston: an environmental justice case study. *Am J Public Health.* 2012;102(10):1974-1980.
+
+3. U.S. Environmental Protection Agency. Toxics Release Inventory (TRI) Program. Accessed April 10, 2026. https://www.epa.gov/toxics-release-inventory-tri-program
