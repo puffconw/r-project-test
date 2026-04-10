@@ -103,7 +103,7 @@ ggplot(tri_pathway, aes(x = pathway, y = log_releases)) +
 
 ## Statistical Test
 
-```{r}
+```{r, results='hide'}
 test_result <- wilcox.test(log_releases ~ pathway, data = tri_pathway)
 test_result
 ```
