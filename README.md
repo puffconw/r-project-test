@@ -51,14 +51,19 @@ Source: https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-
 - A Wilcoxon rank-sum test was used to compare release distributions  
 
 ---
+
 ## 📁 Repository Structure  
-- `data/raw/`: original TRI 2024 data file
-- `data/processed/`: processed data files generated during analysis
-- `scripts/exploration.R`: exploratory analysis script based on Check Point 03
-- `scripts/simulation.R`: simulation script based on Check Point 04
-- `output/figures/`: figures generated from analysis scripts
-- `output/reports/`: PDF reports from previous check points
-- 
+- `app/app.R`: Shiny application code  
+- `data/raw/tri_small.csv`: input dataset  
+- `data/processed/`: processed data files generated during analysis  
+- `scripts/exploration.R`: exploratory analysis (Check Point 03)  
+- `scripts/simulation.R`: simulation analysis (Check Point 04)  
+- `scripts/analysis/Final_report`: final report code  
+- `output/figures/`: generated visualizations  
+- `output/reports/`: PDF reports for all checkpoints and final submission
+
+---
+ 
 ## 📄 Deliverables  
 
 ### Final Deliverables
@@ -72,6 +77,8 @@ Source: https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-
 - Check Point 03 report: [VTPEH6270_CP03.pdf](output/reports/VTPEH6270_CP03.pdf)
 - Check Point 04 report: [VTPEH6270_CP04.pdf](output/reports/VTPEH6270_CP04.pdf)
 
+---
+
 ## Notes for Reproducibility
 The analysis can be reproduced using the provided R scripts and dataset subset.  
 All steps, including data processing, visualization, and statistical testing, are included in the repository.
@@ -80,8 +87,12 @@ Due to GitHub file size limitations, a subset of the TRI dataset is included in 
 As a result, the outputs generated from the scripts in this repository (e.g., figures and summary statistics) may differ slightly from those presented in the original reports, which were based on the full dataset.
 However, the overall analytical workflow and methodology remain consistent and reproducible.
 
+---
+
 ## AI Tool Disclosure
 This repository was developed with assistance from ChatGPT for help with repository organization, code formatting, and documentation. All analytical decisions, interpretations, and conclusions were made by the author.
+
+---
 
 ## References
 
