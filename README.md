@@ -63,7 +63,7 @@ Source: https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-
 
 ### Final Deliverables
 - Final report: [Final_report.pdf](output/reports/Final_report.pdf)
-- Final report code: [VTPEH6270_CP06.Rmd](scripts/analysis.Rmd)
+- Final report code: [analysis.R](scripts/analysis.R)
 - Shiny application: [https://kira-lu.shinyapps.io/tri_app/](https://kira-lu.shinyapps.io/tri_app/)
 - Shiny app code: [app.R](app/app.R)
 
