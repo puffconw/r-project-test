@@ -1,22 +1,37 @@
 # VTPEH 6270 - Check Point 05  
-## GitHub Repository for TRI 2024 Analysis Project
+## A Comparison of Air and Water Releases 
 
-### Author  
+## 👤 Author  
 Kira Lu  
 Cornell University, Master of Public Health (MPH)  
 
 ### Contact  
-Email: ql377@cornell.edu
+Email: ql377@cornell.edu  
 
 ---
 
 ## 📌 Project Overview  
-This repository contains materials for VTPEH 6270 Check Point 05. The project uses the U.S. Environmental Protection Agency (EPA) Toxics Release Inventory (TRI) 2024 dataset to examine patterns in toxic chemical releases across facilities and compare release pathways, especially air versus water releases.
+This repository contains materials for the VTPEH 6270 TRI 2024 analysis project.  
+
+The project uses the U.S. Environmental Protection Agency (EPA) Toxics Release Inventory (TRI) 2024 dataset to examine patterns in toxic chemical releases across facilities, with a focus on comparing **air versus water release pathways**.  
+
+The project includes exploratory analysis, simulation work, a final statistical report, and an interactive Shiny application.
 
 ---
 
 ## 🎯 Research Question  
 Is the magnitude of toxic chemical releases associated with release pathway (air vs. water) among U.S. facilities in 2024?
+
+---
+
+## 🌐 Shiny App  
+https://kira-lu.shinyapps.io/tri_app/
+
+The Shiny application allows users to explore:
+- State-level filtering  
+- Air vs. water release comparisons  
+- Interactive visualizations  
+- Statistical test results  
 
 ---
 
@@ -26,6 +41,16 @@ Source: https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-
 
 ---
 
+## 🧪 Methods Overview  
+- Records with non-missing air and water release values were included  
+- Key variables:
+  - `air_releases`: sum of fugitive and stack air emissions  
+  - `water`: total water releases  
+- Data were reshaped into long format  
+- Log transformation (`log(1 + releases)`) was applied  
+- A Wilcoxon rank-sum test was used to compare release distributions  
+
+---
 ## 📁 Repository Structure  
 - `data/raw/`: original TRI 2024 data file
 - `data/processed/`: processed data files generated during analysis
@@ -33,8 +58,23 @@ Source: https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-
 - `scripts/simulation.R`: simulation script based on Check Point 04
 - `output/figures/`: figures generated from analysis scripts
 - `output/reports/`: PDF reports from previous check points
+- 
+## 📄 Deliverables  
 
-## Deliverables
+### Final Deliverables
+- Final report:  
+  `output/reports/VTPEH6270_CP06.pdf`
+
+- Final report code:  
+  `scripts/analysis/VTPEH6270_CP06.Rmd`
+
+- Shiny application:  
+  https://kira-lu.shinyapps.io/tri_app/
+
+- Shiny app code:  
+  `app/app.R`
+
+### Previous Checkpoint Reports
 - Check Point 02 report: [VTPEH6270contentcheck2.pdf](output/reports/VTPEH6270contentcheck2.pdf)
 - Check Point 03 report: [VTPEH6270_CP03_KiraLu.pdf](output/reports/VTPEH6270_CP03_KiraLu.pdf)
 - Check Point 04 report: [VTPEH6270_CP04_KiraLu.pdf](output/reports/VTPEH6270_CP04_KiraLu.pdf)
