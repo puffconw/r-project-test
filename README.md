@@ -62,30 +62,26 @@ Source: https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-
 ## 📄 Deliverables  
 
 ### Final Deliverables
-- Final report:  
-  `output/reports/VTPEH6270_CP06.pdf`
-
-- Final report code:  
-  `scripts/analysis/VTPEH6270_CP06.Rmd`
-
-- Shiny application:  
-  https://kira-lu.shinyapps.io/tri_app/
-
-- Shiny app code:  
-  `app/app.R`
+- Final report:[VTPEH6270_CP06.pdf](output/reports/Final_report.pdf)
+- Final report code:[VTPEH6270_CP06.Rmd](scripts/analysis.Rmd)
+- Shiny application:[https://kira-lu.shinyapps.io/tri_app/](https://kira-lu.shinyapps.io/tri_app/)
+- Shiny app code:[app.R](app/app.R)
 
 ### Previous Checkpoint Reports
-- Check Point 02 report: [VTPEH6270contentcheck2.pdf](output/reports/VTPEH6270contentcheck2.pdf)
-- Check Point 03 report: [VTPEH6270_CP03_KiraLu.pdf](output/reports/VTPEH6270_CP03_KiraLu.pdf)
-- Check Point 04 report: [VTPEH6270_CP04_KiraLu.pdf](output/reports/VTPEH6270_CP04_KiraLu.pdf)
-
-## AI Tool Disclosure
-This repository was developed with assistance from ChatGPT for help with repository organization, code formatting, and documentation. All analytical decisions, interpretations, and conclusions were made by the author.
+- Check Point 02 report: [VTPEH6270_CP02.pdf](output/reports/VTPEH6270_CP02.pdf)
+- Check Point 03 report: [VTPEH6270_CP03.pdf](output/reports/VTPEH6270_CP03.pdf)
+- Check Point 04 report: [VTPEH6270_CP04.pdf](output/reports/VTPEH6270_CP04.pdf)
 
 ## Notes for Reproducibility
+The analysis can be reproduced using the provided R scripts and dataset subset.  
+All steps, including data processing, visualization, and statistical testing, are included in the repository.
+
 Due to GitHub file size limitations, a subset of the TRI dataset is included in this repository (`tri_small.csv`). 
 As a result, the outputs generated from the scripts in this repository (e.g., figures and summary statistics) may differ slightly from those presented in the original reports, which were based on the full dataset.
 However, the overall analytical workflow and methodology remain consistent and reproducible.
+
+## AI Tool Disclosure
+This repository was developed with assistance from ChatGPT for help with repository organization, code formatting, and documentation. All analytical decisions, interpretations, and conclusions were made by the author.
 
 ## References
 
