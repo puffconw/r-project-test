@@ -1,5 +1,5 @@
-# VTPEH 6270 - Check Point 05  
-## A Comparison of Air and Water Releases 
+# VTPEH 6270 - Differences in Toxic Chemical Release Pathways:   
+## A Comparison of Air and Water Releases  
 
 ## 👤 Author  
 Kira Lu  
