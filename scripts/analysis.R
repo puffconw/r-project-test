@@ -14,7 +14,7 @@ urlcolor: blue
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
 # Introduction
@@ -110,26 +110,36 @@ ggplot(tri_pathway, aes(x = pathway, y = log_releases)) +
 
 ## Statistical Test
 
-```{r, results='hide'}
+```{r}
 test_result <- wilcox.test(log_releases ~ pathway, data = tri_pathway)
 test_result
 ```
-A Wilcoxon rank-sum test was conducted to assess differences in log-transformed toxic release amounts between air and water pathways. The test revealed a statistically significant difference between the two pathways (W = 19635229, p < 2.2e-16).
+
+A Wilcoxon rank-sum test was conducted to assess differences in log-transformed toxic release amounts between air and water pathways. 
+
+The results indicated a statistically significant difference between the two pathways (W = 19635229, p < 2.2e-16). This suggests that the distribution of toxic releases differs significantly depending on the release pathway.
+
+Although the p-value indicates strong statistical significance, it does not directly reflect the magnitude of the difference. Therefore, interpretation should consider both statistical and practical significance.
 
 ## Interpretation
 
 The distributions of log-transformed toxic releases were visualized using histograms and boxplots. The results show that water releases are highly concentrated near zero with several extreme outliers, while air releases exhibit a broader distribution.
 
-Descriptive patterns suggest that air releases have a higher median and greater variability compared to water releases.
+Descriptive patterns suggest that air releases have a higher median and greater variability compared to water releases. This indicates that air emissions tend to be more widely distributed across facilities, whereas water releases are typically minimal but occasionally extreme.
 
-The Wilcoxon rank-sum test indicated a statistically significant difference between pathways (W = 19635229, p < 2.2e-16), suggesting that release distributions differ between air and water pathways.
+These findings highlight meaningful differences in release patterns between pathways, suggesting that different environmental and regulatory considerations may apply to air versus water emissions.
 
 # Conclusion
 
-This analysis demonstrates that toxic release amounts differ significantly between air and water pathways in the TRI dataset. Air releases show a broader distribution, while water releases are concentrated near zero with extreme outliers. These findings suggest that release pathway is strongly associated with differences in both the magnitude and variability of toxic releases.
+This analysis demonstrates that toxic release amounts differ significantly between air and water pathways in the TRI dataset. Air releases show a broader distribution, while water releases are concentrated near zero with extreme outliers.
+
+These findings suggest that release pathway is strongly associated with differences in both the magnitude and variability of toxic releases. From a public health and environmental perspective, these differences may have implications for monitoring strategies and regulatory policies, as distinct pathways may require tailored approaches to risk assessment and control.
 
 # Limitation
-One limitation of this analysis is that it relies on a subset of the TRI dataset, which may not fully represent all facilities or geographic variation. In addition, the analysis does not account for differences in facility size or industry type, which may influence the magnitude of reported releases.
+
+One limitation of this analysis is that it relies on a subset of the TRI dataset, which may not fully represent all facilities or geographic variation. In addition, the analysis does not account for differences in facility size, industry type, or regulatory compliance, which may influence the magnitude of reported releases.
+
+Furthermore, the use of a non-parametric test limits the ability to estimate the magnitude of differences between groups. Future analyses could incorporate additional covariates and modeling approaches to better understand the drivers of variation in toxic releases.
 
 # GitHub Repository
 
