@@ -1,4 +1,4 @@
-# VTPEH 6270 - Differences in Toxic Chemical Release Pathways:   
+# Differences in Toxic Chemical Release Pathways:   
 ## A Comparison of Air and Water Releases  
 
 ## 👤 Author  
